@@ -1,10 +1,9 @@
 ---
-title: "baseball_team_site"
+title: "Honolulu Dragons Team Records"
+echo: false
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+# Page 1
 
 ```{r}
 1 + 1
@@ -38,19 +37,21 @@ df %>%
 
 ```
 
+# Total Batting Average
+
 ![]()
 
 ```{r}
 ## Total At Bat
 total_at_bat <- df %>% 
   filter(event != 'BB') %>% 
-  count(player_id) %>% 
+  count(player_name) %>% 
   arrange(desc(n))
 
 ## Total HIT
 total_hit <- df %>% 
   filter(event == 'HIT') %>% 
-  count(player_id) %>% 
+  count(player_name) %>% 
   arrange(desc(n))
 
 
@@ -64,36 +65,84 @@ batting_ave <- df %>%
       AB = sum(total, na.rm = TRUE),
       H = sum(hit, na.rm = TRUE),
       AV = H/AB)  %>% 
-  arrange(desc(H))
+  arrange(desc(AB))
 
 
 
 batting_ave
 ```
 
+## Batting Average of Softball
+
 ```{r}
-library(dplyr)
-library(tidyr)
+batting_ave_s <- df %>% 
+    filter(sport == 's') %>% 
+    mutate(
+        total = event != "BB",
+        hit = event == "HIT"
+    ) %>% 
+    group_by(player_name) %>% 
+    summarise(
+      AB = sum(total, na.rm = TRUE),
+      H = sum(hit, na.rm = TRUE),
+      AV = H/AB)  %>% 
+  arrange(desc(H))
 
-batting_avg <- df %>%
-  mutate(
-    # Optional: standardize error label
-    event = if_else(event == "E", "ROE", event),
+batting_ave_s
 
-    # AB rules (common): HIT, OUT, K, ROE count as AB
-    is_ab  = event %in% c("HIT", "OUT", "K", "ROE"),
-    is_hit = event == "HIT"
-  ) %>%
-  group_by(player_id, player_name) %>%
-  summarise(
-    AB = sum(is_ab, na.rm = TRUE),
-    H  = sum(is_hit, na.rm = TRUE),
-    BA = if_else(AB > 0, H / AB, NA_real_),
-    .groups = "drop"
-  ) %>%
-  arrange(desc(AB))
+```
 
-batting_avg
+## Batting Average of baseball (軟式）
+
+```{r}
+batting_ave_b <- df %>% 
+    filter(sport == 'b') %>% 
+    mutate(
+        total = event != "BB",
+        hit = event == "HIT"
+    ) %>% 
+    group_by(player_name) %>% 
+    summarise(
+      AB = sum(total, na.rm = TRUE),
+      H = sum(hit, na.rm = TRUE),
+      AV = H/AB)  %>% 
+  arrange(desc(H))
+
+batting_ave_b
+```
+
+# Total Number of HIT
+
+```{r}
+#Total 
+total_hit_both <- df %>% 
+  filter(event == 'HIT') %>% 
+  mutate(hit = event == "HIT") %>% 
+  group_by(player_name) %>% 
+  summarise(H = sum(hit, na.rm = TRUE))  %>% 
+  arrange(desc(H))
+
+total_hit_both
+
+# Softball
+total_hit_s <- df %>% 
+  filter(event == 'HIT', sport == 's') %>% 
+  mutate(hit = event == "HIT") %>% 
+  group_by(player_name) %>% 
+  summarise(H = sum(hit, na.rm = TRUE))  %>% 
+  arrange(desc(H))
+
+total_hit_s
+
+# Baseball
+total_hit_b <- df %>% 
+  filter(event == 'HIT', sport == 'b') %>% 
+  mutate(hit = event == "HIT") %>% 
+  group_by(player_name) %>% 
+  summarise(H = sum(hit, na.rm = TRUE))  %>% 
+  arrange(desc(H))
+
+total_hit_b
 
 ```
 
