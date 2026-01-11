@@ -9,3 +9,103 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 ```{r}
 1 + 1
 ```
+
+```{r}
+df <- read.csv("data/baseball _records.csv")
+
+
+```
+
+```{r}
+library(tidyverse)
+library(dplyr)
+
+df %>% 
+  filter(player_name == 'Yoda', hit_type == "HR") %>% 
+  select(player_name, hit_type) %>% 
+  group_by(player_name) %>% 
+  summarise(n = n())
+
+
+
+
+  
+  
+  
+
+
+  
+
+```
+
+![]()
+
+```{r}
+## Total At Bat
+total_at_bat <- df %>% 
+  filter(event != 'BB') %>% 
+  count(player_id) %>% 
+  arrange(desc(n))
+
+## Total HIT
+total_hit <- df %>% 
+  filter(event == 'HIT') %>% 
+  count(player_id) %>% 
+  arrange(desc(n))
+
+
+batting_ave <- df %>% 
+    mutate(
+        total = event != "BB",
+        hit = event == "HIT"
+    ) %>% 
+    group_by(player_name) %>% 
+    summarise(
+      AB = sum(total, na.rm = TRUE),
+      H = sum(hit, na.rm = TRUE),
+      AV = H/AB)  %>% 
+  arrange(desc(H))
+
+
+
+batting_ave
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+batting_avg <- df %>%
+  mutate(
+    # Optional: standardize error label
+    event = if_else(event == "E", "ROE", event),
+
+    # AB rules (common): HIT, OUT, K, ROE count as AB
+    is_ab  = event %in% c("HIT", "OUT", "K", "ROE"),
+    is_hit = event == "HIT"
+  ) %>%
+  group_by(player_id, player_name) %>%
+  summarise(
+    AB = sum(is_ab, na.rm = TRUE),
+    H  = sum(is_hit, na.rm = TRUE),
+    BA = if_else(AB > 0, H / AB, NA_real_),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(AB))
+
+batting_avg
+
+```
+
+```{r}
+
+
+library(dplyr)
+
+df %>% summarise(games = n_distinct(game_id))
+
+```
+
+```{r}
+
+```
