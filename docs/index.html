@@ -66,6 +66,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -152,18 +154,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.2
-✔ ggplot2   4.0.0     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   player_name     n
@@ -293,6 +283,261 @@ ul.task-list li input[type="checkbox"] {
 16 Mune            1
 17 Yuki            1
 18 Yuma            1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   player_name total_hit total_hit_softball total_hit_baseball
+1         Yoda        52                 41                 11
+2           Ii        46                 36                 10
+3       Manabu        35                 26                  9
+4        Naoki        32                 29                  3
+5         Kazu        28                 28                  0
+6        Taizo        28                 26                  2
+7         Haru        27                 22                  5
+8          Rei        26                 22                  4
+9     Shintani        21                 19                  2
+10       Tommy        19                 19                  0
+11        Yoji        18                 12                  6
+12        Reon        17                 13                  4
+13         Ken        13                 13                  0
+14        Yuki        12                 11                  1
+15        Mune         9                  8                  1
+16       Keita         9                  8                  1
+17       Kinjo         8                  7                  1
+18     Tetsuzo         8                  6                  2
+19       Oshio         7                  7                  0
+20         Ito         7                  6                  1
+21        Yuma         7                  6                  1
+22       Chiiu         5                  5                  0
+23     Galison         3                  3                  0
+24        Ueno         2                  2                  0
+25       Gavin         2                  0                  2
+26   Yoshizawa         1                  1                  0
+27       Issei         1                  1                  0
+28       Shion         0                  0                  0
+29       Iwata         0                  0                  0
+30        Masa         0                  0                  0
+31        Drew         0                  0                  0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<caption>Total Hits (Both / Softball / Baseball)</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">player_name</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">total_hit</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">total_hit_softball</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">total_hit_baseball</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yoda</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ii</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Manabu</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Naoki</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Kazu</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Taizo</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Haru</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Rei</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Shintani</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Tommy</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yoji</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Reon</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ken</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yuki</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Mune</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Keita</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Kinjo</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Tetsuzo</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Oshio</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ito</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yuma</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Chiiu</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Galison</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ueno</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Gavin</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yoshizawa</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Issei</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Shion</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Iwata</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Masa</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Drew</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Note: </span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0;"><sup></sup> THis is a general footnote</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+
+
 </div>
 </div>
 <div class="cell">

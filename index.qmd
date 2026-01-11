@@ -1,6 +1,8 @@
 ---
 title: "Honolulu Dragons Team Records"
 echo: false
+message: false
+warning: false
 ---
 
 # Page 1
@@ -144,6 +146,60 @@ total_hit_b <- df %>%
 
 total_hit_b
 
+```
+
+```{r}
+#install.packages("kableExtra")
+
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+
+# Total hits for BOTH
+hits_both <- df %>%
+  filter(event == "HIT") %>%
+  count(player_name, name = "total_hit")
+
+# Total hits for SOFTBALL
+hits_softball <- df %>%
+  filter(event == "HIT", sport == "s") %>%
+  count(player_name, name = "total_hit_softball")
+
+# Total hits for BASEBALL
+hits_baseball <- df %>%
+  filter(event == "HIT", sport == "b") %>%
+  count(player_name, name = "total_hit_baseball")
+
+# Combine into one table (include players with 0 too)
+hits_table <- df %>%
+  distinct(player_name) %>%
+  left_join(hits_both, by = "player_name") %>%
+  left_join(hits_softball, by = "player_name") %>%
+  left_join(hits_baseball, by = "player_name") %>%
+  mutate(
+    total_hit = replace_na(total_hit, 0),
+    total_hit_softball = replace_na(total_hit_softball, 0),
+    total_hit_baseball = replace_na(total_hit_baseball, 0)
+  ) %>%
+  arrange(desc(total_hit))
+
+hits_table
+
+```
+
+```{r}
+
+kable(
+  hits_table,
+  caption = "Total Hits (Both / Softball / Baseball)"
+) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "THis is a general footnote")
 ```
 
 ```{r}
