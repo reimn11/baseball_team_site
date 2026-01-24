@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Honolulu Dragons Team Records",
     "section": "",
-    "text": "[1] 2\n\n\n\n\n# A tibble: 1 × 2\n  player_name     n\n  &lt;chr&gt;       &lt;int&gt;\n1 Yoda           27"
+    "text": "# A tibble: 1 × 2\n  player_name     n\n  &lt;chr&gt;       &lt;int&gt;\n1 Yoda           27"
   },
   {
     "objectID": "index.html#batting-average-of-softball",
