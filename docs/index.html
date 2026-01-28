@@ -114,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#total-reocords" id="toc-total-reocords" class="nav-link active" data-scroll-target="#total-reocords">Total Reocords</a>
+  <li><a href="#total-rcords" id="toc-total-rcords" class="nav-link active" data-scroll-target="#total-rcords">Total Rcords</a>
   <ul class="collapse">
   <li><a href="#batting-average-of-softball" id="toc-batting-average-of-softball" class="nav-link" data-scroll-target="#batting-average-of-softball">Batting Average of Softball</a></li>
   <li><a href="#batting-average-of-baseball-軟式" id="toc-batting-average-of-baseball-軟式" class="nav-link" data-scroll-target="#batting-average-of-baseball-軟式">Batting Average of baseball (軟式）</a></li>
@@ -153,62 +153,18 @@ ul.task-list li input[type="checkbox"] {
 1 Yoda           27</code></pre>
 </div>
 </div>
-<section id="total-reocords" class="level1">
-<h1>Total Reocords</h1>
+<section id="total-rcords" class="level1">
+<h1>Total Rcords</h1>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 4</code></pre>
+<pre><code>[1] "BB"  "DB"  "E"   "HIT" "K"   "OUT"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] ""   "!b" "1b" "1B" "2B" "3B" "HR"</code></pre>
+<pre><code>[1] 6</code></pre>
 </div>
 </div>
 <p><img src=".png" class="img-fluid"></p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 21 × 2
-   player_name double
-   &lt;chr&gt;        &lt;int&gt;
- 1 Ii              14
- 2 Kazu             9
- 3 Taizo            8
- 4 Naoki            7
- 5 Rei              7
- 6 Haru             6
- 7 Manabu           6
- 8 Tommy            5
- 9 Yoda             5
-10 Keita            4
-# ℹ 11 more rows</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 2
-  player_name triple
-  &lt;chr&gt;        &lt;int&gt;
-1 Haru             2
-2 Tommy            2
-3 Naoki            1
-4 Tetsuzo          1
-5 Yuki             1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 2
-   player_name    hr
-   &lt;chr&gt;       &lt;int&gt;
- 1 Yoda           27
- 2 Rei             4
- 3 Reon            3
- 4 Yuki            3
- 5 Kazu            2
- 6 Manabu          2
- 7 Tetsuzo         2
- 8 Galison         1
- 9 Haru            1
-10 Ii              1
-11 Ken             1
-12 Naoki           1
-13 Yoji            1</code></pre>
-</div>
 <div class="cell-output-display">
 <table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
 <caption>Total Records</caption>
@@ -224,56 +180,61 @@ ul.task-list li input[type="checkbox"] {
 <th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">Triple_b</th>
 <th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">Hr_b</th>
 <th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">Bb_b</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; color: azure !important; background-color: rgba(100, 149, 237, 255) !important;">hightlight</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yoda</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">0.6842105</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important; font-weight: bold; color: darkcyan !important;">Yoda</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">76</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">52</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0.6842105</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">72</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">20</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">5</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">27</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">5</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important;">TRUE</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ii</td>
-<td style="text-align: right;">83</td>
-<td style="text-align: right;">46</td>
-<td style="text-align: right;">0.5542169</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">9</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important; font-weight: bold; color: darkcyan !important;">Ii</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">84</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">46</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0.5476190</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">16</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">31</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">14</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">1</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">9</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important;">TRUE</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Manabu</td>
-<td style="text-align: right;">78</td>
-<td style="text-align: right;">35</td>
-<td style="text-align: right;">0.4487179</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important; font-weight: bold; color: darkcyan !important;">Manabu</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">79</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">35</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0.4430380</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">26</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">27</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">6</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">2</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important;">TRUE</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Naoki</td>
-<td style="text-align: right;">84</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">0.3809524</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important; font-weight: bold; color: darkcyan !important;">Naoki</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">86</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">32</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0.3720930</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">20</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">23</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">7</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">1</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">1</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">5</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important;">TRUE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Kazu</td>
@@ -286,30 +247,33 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Taizo</td>
-<td style="text-align: right;">77</td>
-<td style="text-align: right;">28</td>
-<td style="text-align: right;">0.3636364</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">4</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important; font-weight: bold; color: darkcyan !important;">Taizo</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">78</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">28</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0.3589744</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">15</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">19</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">8</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">4</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important;">TRUE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Haru</td>
-<td style="text-align: right;">67</td>
+<td style="text-align: right;">70</td>
 <td style="text-align: right;">27</td>
-<td style="text-align: right;">0.4029851</td>
+<td style="text-align: right;">0.3857143</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Rei</td>
@@ -322,18 +286,20 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">2</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; font-weight: bold; color: darkcyan !important;">Shintani</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">0.2800000</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important; font-weight: bold; color: darkcyan !important;">Shintani</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">78</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">21</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0.2692308</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">15</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">17</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">2</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">0</td>
+<td style="text-align: right; background-color: rgba(255, 243, 205, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(255, 243, 205, 255) !important;">TRUE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Tommy</td>
@@ -346,6 +312,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">5</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yoji</td>
@@ -358,18 +325,20 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Reon</td>
-<td style="text-align: right;">44</td>
+<td style="text-align: right;">45</td>
 <td style="text-align: right;">17</td>
-<td style="text-align: right;">0.3863636</td>
+<td style="text-align: right;">0.3777778</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">4</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ken</td>
@@ -382,18 +351,20 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yuki</td>
-<td style="text-align: right;">27</td>
+<td style="text-align: right;">28</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">0.4444444</td>
+<td style="text-align: right;">0.4285714</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Keita</td>
@@ -406,6 +377,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Mune</td>
@@ -418,6 +390,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">5</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Kinjo</td>
@@ -430,6 +403,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Tetsuzo</td>
@@ -442,18 +416,20 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ito</td>
-<td style="text-align: right;">19</td>
+<td style="text-align: right;">20</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">0.3684211</td>
+<td style="text-align: right;">0.3500000</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Oshio</td>
@@ -466,30 +442,33 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yuma</td>
-<td style="text-align: right;">25</td>
+<td style="text-align: right;">26</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">0.2800000</td>
+<td style="text-align: right;">0.2692308</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Chiiu</td>
-<td style="text-align: right;">15</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">0.3333333</td>
+<td style="text-align: right;">0.3125000</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Galison</td>
@@ -502,6 +481,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Gavin</td>
@@ -514,6 +494,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Ueno</td>
@@ -526,6 +507,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Issei</td>
@@ -538,6 +520,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Yoshizawa</td>
@@ -550,6 +533,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Drew</td>
@@ -562,6 +546,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Iwata</td>
@@ -574,6 +559,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Masa</td>
@@ -586,6 +572,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: darkcyan !important;">Shion</td>
@@ -598,6 +585,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 </tbody><tfoot>
 <tr class="odd">
@@ -611,6 +599,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left; padding: 0;"><sup></sup> This order based on HIT</td>
@@ -623,12 +612,32 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
+<td style="text-align: left;"></td>
 </tr>
 </tfoot>
 
 </table>
 
 
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 31 × 2
+   player_name total
+   &lt;chr&gt;       &lt;int&gt;
+ 1 Shintani        2
+ 2 Chiiu           1
+ 3 Ii              1
+ 4 Kazu            1
+ 5 Keita           1
+ 6 Kinjo           1
+ 7 Manabu          1
+ 8 Naoki           1
+ 9 Oshio           1
+10 Tommy           1
+# ℹ 21 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
 </div>
 </div>
 <div class="cell">

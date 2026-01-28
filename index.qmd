@@ -33,11 +33,12 @@ df %>%
 
 ```
 
-# Total Reocords
+# Total Rcords
 
 ```{r}
-sort(unique(df$rbi))
-sort(unique(df$hit_type))
+sort(unique(df$event))
+
+n_distinct(df$event)
 ```
 
 ![]()
@@ -48,6 +49,17 @@ library(tidyr)
 library(knitr)
 library(kableExtra)
 library(tidyverse)
+####### Data cleaning ########
+# hit_type (1B, !B, and 1b)
+df <- df %>% 
+  mutate(
+    hit_type = str_trim(hit_type),
+    hit_type = na_if(hit_type, ""), # "" -> NA
+    hit_type = str_to_upper(hit_type), # 1b -> 1B
+    hit_type = recode(hit_type, '!B' = "1B") # str_to_upper changes !b to !B.
+  )
+#sort(unique(df$hit_type)) #Check datas were cleaned correctly
+
 
 # Total Hit Records
 ## Total At Bat
@@ -65,7 +77,7 @@ total_rbi_b <- df %>%
 ## Total 1B 
 total_one_base_b <- df %>% 
   filter(hit_type == '1B') %>% 
-  mutate(one_b_b = hit_type == '1B') %>% 
+  mutate(one_b_b = hit_type == '1B', '1b', '!b') %>% 
   group_by(player_name) %>% 
   summarise(single = sum(one_b_b)) %>% 
   arrange(desc(single))
@@ -75,35 +87,35 @@ total_two_base_b <- df %>%
   filter(hit_type == '2B') %>% 
   mutate(two_b_b = hit_type == '2B') %>% 
   group_by(player_name) %>% 
-  summarise(double = sum(two_b_b)) %>% 
+  summarise(double = sum(two_b_b, na.rm = TRUE)) %>% 
   arrange(desc(double))
 
-total_two_base_b
+#total_two_base_b
 
 ## Total 3B 
 total_three_base_b <- df %>% 
   filter(hit_type == '3B') %>% 
   mutate(three_b_b = hit_type == '3B') %>% 
   group_by(player_name) %>% 
-  summarise(triple = sum(three_b_b)) %>% 
+  summarise(triple = sum(three_b_b, na.rm = TRUE)) %>% 
   arrange(desc(triple))
 
-total_three_base_b
+#total_three_base_b
 
 ## Total HR 
 total_hr_base_b <- df %>% 
   filter(hit_type == 'HR') %>% 
   mutate(hr_b = hit_type == 'HR') %>% 
   group_by(player_name) %>% 
-  summarise(hr = sum(hr_b)) %>% 
+  summarise(hr = sum(hr_b, na.rm = TRUE)) %>% 
   arrange(desc(hr))
 
-total_hr_base_b
+#total_hr_base_b
 
 ## Total Batting Average
 total_records_both <- df %>% 
-  mutate(rem_sac = (event == 'OUT') & !is.na(rbi),
-         total_ab = event %in% c("HIT",'OUT', 'E', 'K') & !rem_sac,
+  mutate(rem_sac = (event == "OUT") & !is.na(rbi) & (rbi >= 1) & (field_pos %in% c(7,8,9)), # Remove scrify fly 
+         total_ab = event %in% c("HIT",'OUT', 'E', 'K') & !rem_sac, # Remove BB, and Db and Sacrify fly
          hit = event == 'HIT',
          one_base = hit_type == '1B',
          two_base = hit_type == '2B',
@@ -126,11 +138,19 @@ total_records_both <- df %>%
     ) %>% 
   arrange(desc(HIT_b))
 
+####### hightlight the quarify player #########
+qualify_player <- total_records_both %>% 
+  mutate(hightlight = AB_b >= 75) # 30 * 2.5 = 75
 
+
+
+
+###### Create a Table ######
 kable(
-  total_records_both,
+  qualify_player,
   caption = "Total Records"
 ) %>%
+    kableExtra::row_spec(which(qualify_player$hightlight), background = "#fff3cd") %>%  
   kable_styling(
     bootstrap_options = c("striped", "hover", "condensed")
   ) %>% 
@@ -139,6 +159,14 @@ kable(
   footnote(general = "This order based on HIT")
 
 
+make_sure <- df %>% 
+  mutate(sacifies = event == 'OUT' & !is.na(rbi) & field_pos %in% c(7,8,9)) %>% 
+  group_by(player_name) %>% 
+  summarise(total = sum(sacifies, na.rm = TRUE)) %>% 
+  arrange(desc(total))
+
+make_sure
+class(df$field_pos)
 ```
 
 ```{r}
