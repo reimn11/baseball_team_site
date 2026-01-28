@@ -33,9 +33,113 @@ df %>%
 
 ```
 
-# Total Batting Average
+# Total Reocords
+
+```{r}
+sort(unique(df$rbi))
+sort(unique(df$hit_type))
+```
 
 ![]()
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+
+# Total Hit Records
+## Total At Bat
+total_at_bat_b <- df %>% 
+  filter(event %in% c("HIT",'OUT', 'E', 'K')) %>% 
+  count(player_name, name = "AB") %>% 
+  arrange(desc(AB))
+
+## Total rbi
+total_rbi_b <- df %>% 
+  group_by(player_name) %>% 
+  summarise(rbi_b = sum(rbi, na.rm = TRUE)) %>% 
+  arrange(desc(rbi_b))
+
+## Total 1B 
+total_one_base_b <- df %>% 
+  filter(hit_type == '1B') %>% 
+  mutate(one_b_b = hit_type == '1B') %>% 
+  group_by(player_name) %>% 
+  summarise(single = sum(one_b_b)) %>% 
+  arrange(desc(single))
+
+## Total 2B 
+total_two_base_b <- df %>% 
+  filter(hit_type == '2B') %>% 
+  mutate(two_b_b = hit_type == '2B') %>% 
+  group_by(player_name) %>% 
+  summarise(double = sum(two_b_b)) %>% 
+  arrange(desc(double))
+
+total_two_base_b
+
+## Total 3B 
+total_three_base_b <- df %>% 
+  filter(hit_type == '3B') %>% 
+  mutate(three_b_b = hit_type == '3B') %>% 
+  group_by(player_name) %>% 
+  summarise(triple = sum(three_b_b)) %>% 
+  arrange(desc(triple))
+
+total_three_base_b
+
+## Total HR 
+total_hr_base_b <- df %>% 
+  filter(hit_type == 'HR') %>% 
+  mutate(hr_b = hit_type == 'HR') %>% 
+  group_by(player_name) %>% 
+  summarise(hr = sum(hr_b)) %>% 
+  arrange(desc(hr))
+
+total_hr_base_b
+
+## Total Batting Average
+total_records_both <- df %>% 
+  mutate(rem_sac = (event == 'OUT') & !is.na(rbi),
+         total_ab = event %in% c("HIT",'OUT', 'E', 'K') & !rem_sac,
+         hit = event == 'HIT',
+         one_base = hit_type == '1B',
+         two_base = hit_type == '2B',
+         three_base = hit_type == '3B',
+         hr = hit_type == 'HR',
+         bb = event == 'BB') %>%
+  
+  group_by(player_name) %>% 
+  summarise(
+    AB_b = sum(total_ab, na.rm = TRUE),
+    HIT_b = sum(hit, na.rm = TRUE),
+    AV_b = HIT_b/AB_b,
+    RBI_b = sum(rbi, na.rm = TRUE),
+    One_b = sum(one_base, na.rm = TRUE),
+    Double_b = sum(two_base, na.rm = TRUE), 
+    Triple_b = sum(three_base, na.rm = TRUE),
+    Hr_b = sum(hr, na.rm = TRUE),
+    Bb_b = sum(bb, na.rm = TRUE)
+    
+    ) %>% 
+  arrange(desc(HIT_b))
+
+
+kable(
+  total_records_both,
+  caption = "Total Records"
+) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "This order based on HIT")
+
+
+```
 
 ```{r}
 ## Total At Bat
@@ -153,7 +257,7 @@ library(kableExtra)
 # Total hits for BOTH
 hits_both <- df %>%
   filter(event == "HIT") %>%
-  count(player_name, name = "total_hit")
+  count(player_name, name = "total hit")
 
 # Total hits for SOFTBALL
 hits_softball <- df %>%
@@ -172,13 +276,14 @@ hits_table <- df %>%
   left_join(hits_softball, by = "player_name") %>%
   left_join(hits_baseball, by = "player_name") %>%
   mutate(
-    total_hit = replace_na(total_hit, 0),
+    `total hit` = replace_na(`total hit`, 0),
     total_hit_softball = replace_na(total_hit_softball, 0),
     total_hit_baseball = replace_na(total_hit_baseball, 0)
   ) %>%
-  arrange(desc(total_hit))
+  arrange(desc(`total hit`))
 
 hits_table
+
 
 ```
 
@@ -209,8 +314,8 @@ df %>% summarise(games = n_distinct(game_id))
 df %>% 
   filter(event == 'HIT') %>% 
   select(player_name ,hit_type) %>% 
-  count(player_name, name = 'HR') %>% 
-  arrange(desc(HR))
+  count(player_name, name = 'HIT') %>% 
+  arrange(desc(HIT))
 
 ```
 
