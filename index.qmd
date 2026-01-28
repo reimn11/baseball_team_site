@@ -112,8 +112,8 @@ total_hr_base_b <- df %>%
 
 #total_hr_base_b
 
-## Total Batting Average
-total_records_both <- df %>% 
+## CALUCULATE THE OPS -> SLG + OBP
+at_bat <- df %>% 
   mutate(rem_sac = (event == "OUT") & !is.na(rbi) & (rbi >= 1) & (field_pos %in% c(7,8,9)), # Remove scrify fly 
          total_ab = event %in% c("HIT",'OUT', 'E', 'K') & !rem_sac, # Remove BB, and Db and Sacrify fly
          hit = event == 'HIT',
@@ -121,8 +121,8 @@ total_records_both <- df %>%
          two_base = hit_type == '2B',
          three_base = hit_type == '3B',
          hr = hit_type == 'HR',
-         bb = event == 'BB') %>%
-  
+         bb = event == 'BB',
+         db = event == 'DB') %>%
   group_by(player_name) %>% 
   summarise(
     AB_b = sum(total_ab, na.rm = TRUE),
@@ -133,13 +133,21 @@ total_records_both <- df %>%
     Double_b = sum(two_base, na.rm = TRUE), 
     Triple_b = sum(three_base, na.rm = TRUE),
     Hr_b = sum(hr, na.rm = TRUE),
-    Bb_b = sum(bb, na.rm = TRUE)
+    Bb_b = sum(bb, na.rm = TRUE),
+    Db_b = sum(db, na.rm = TRUE),
+    SF_b = sum(rem_sac, na.rm = TRUE),
+    TB_b = One_b*1 + Double_b*2 + Triple_b*3 + Hr_b*4,
+    SLG = TB_b/AB_b, #SLG
+    OBP = (HIT_b + Bb_b + Db_b) / (AB_b + Bb_b + SF_b + Db_b),
+    OPS = SLG + OBP
     
     ) %>% 
   arrange(desc(HIT_b))
 
+#at_bat
+
 ####### hightlight the quarify player #########
-qualify_player <- total_records_both %>% 
+qualify_player <- at_bat %>% 
   mutate(hightlight = AB_b >= 75) # 30 * 2.5 = 75
 
 
@@ -158,15 +166,6 @@ kable(
   column_spec(1, bold = TRUE, color = "darkcyan") %>% 
   footnote(general = "This order based on HIT")
 
-
-make_sure <- df %>% 
-  mutate(sacifies = event == 'OUT' & !is.na(rbi) & field_pos %in% c(7,8,9)) %>% 
-  group_by(player_name) %>% 
-  summarise(total = sum(sacifies, na.rm = TRUE)) %>% 
-  arrange(desc(total))
-
-make_sure
-class(df$field_pos)
 ```
 
 ```{r}
