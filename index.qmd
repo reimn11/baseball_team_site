@@ -14,31 +14,14 @@ df <- read.csv("data/baseball _records.csv")
 ```{r}
 library(tidyverse)
 library(dplyr)
-
-df %>% 
-  filter(player_name == 'Yoda', hit_type == "HR") %>% 
-  select(player_name, hit_type) %>% 
-  group_by(player_name) %>% 
-  summarise(n = n())
-
-
-
-
-  
-  
-  
-
-
-  
-
 ```
 
-# Total Rcords
+# Total Stats
 
 ```{r}
-sort(unique(df$event))
+sort(unique(df$game_id))
 
-n_distinct(df$event)
+n_distinct(df$game_id)
 ```
 
 ![]()
@@ -110,6 +93,14 @@ total_hr_base_b <- df %>%
   summarise(hr = sum(hr_b, na.rm = TRUE)) %>% 
   arrange(desc(hr))
 
+## Count the game 
+total_games <- df %>% 
+  group_by(player_name) %>% 
+  summarise(game = n_distinct(game_id), .groups = "drop") %>% 
+  arrange(desc(game))
+
+#total_games
+
 #total_hr_base_b
 
 ## CALUCULATE THE OPS -> SLG + OBP
@@ -125,6 +116,7 @@ at_bat <- df %>%
          db = event == 'DB') %>%
   group_by(player_name) %>% 
   summarise(
+    game = n_distinct(game_id), .groups = "drop",
     AB_b = sum(total_ab, na.rm = TRUE),
     HIT_b = sum(hit, na.rm = TRUE),
     AV_b = HIT_b/AB_b,
@@ -142,28 +134,53 @@ at_bat <- df %>%
     OPS = SLG + OBP
     
     ) %>% 
-  arrange(desc(HIT_b))
+  arrange(desc(game))
 
 #at_bat
 
 ####### hightlight the quarify player #########
 qualify_player <- at_bat %>% 
-  mutate(hightlight = AB_b >= 75) # 30 * 2.5 = 75
+  mutate(hightlight = AB_b >= 69) # 30 * 2.3 = 69
+## game_id distinct() * 2.3 = ?
 
+
+### Rename the columns name
+hits_tbale_rename <- qualify_player %>% 
+  rename(
+    Player = player_name,
+    AB = AB_b, 
+    H = HIT_b,
+    AVG = AV_b,
+    RBI = RBI_b,
+    Single = One_b,
+    Double = Double_b,
+    Triple = Triple_b,
+    HR = Hr_b,
+    BB = Bb_b,
+    HBP = Db_b,
+    SF = SF_b,
+  )
+
+game_stats <- hits_tbale_rename %>% 
+  select(!c(TB_b, hightlight))
+
+### Display the 3 decimal on AVG, OPS etc...
+three_decimal <- function(x) {
+  out <- ifelse(is.na(),"",sprintf("%.3f", x))
+  out <- ifelase(out != "" & 1 < x & x >= 0, sub("^0", "", x), out)
+  out
+} 
+  
 
 
 
 ###### Create a Table ######
-kable(
-  qualify_player,
-  caption = "Total Records"
-) %>%
-    kableExtra::row_spec(which(qualify_player$hightlight), background = "#fff3cd") %>%  
+kable(game_stats, caption = "Total Stats for basedball (軟式）and softball", booktabs = TRUE) %>%
+  kableExtra::row_spec(which(qualify_player$hightlight), background = "slategray1") %>% 
   kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed")
+    bootstrap_options = c("condensed", "basic", "hover")
   ) %>% 
-  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
-  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  row_spec(0, bold = TRUE, color = "slategray1", background = "blue") %>%   column_spec(1, bold = TRUE, color = "slategray1", background = "blue") %>% 
   footnote(general = "This order based on HIT")
 
 ```
