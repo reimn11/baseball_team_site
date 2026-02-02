@@ -7,24 +7,47 @@ warning: false
 
 ```{r}
 df <- read.csv("data/baseball _records.csv")
-
-
-```
-
-```{r}
-library(tidyverse)
-library(dplyr)
 ```
 
 # Total Stats
 
-```{r}
-sort(unique(df$game_id))
+### Table Explanation
 
-n_distinct(df$game_id)
-```
+**game**: Number of games you played　（出場試合数）
 
-![]()
+**AB**: At-bats （打席数）
+
+**HIT**: Total hits　（安打）
+
+**AVG**: Batting Average: HIT/AB　（打率　＝　安打/打席数）
+
+**RBI**: Runs batted in （打点）
+
+**Single**: Total 1B （単打）
+
+**Doubles**: Total 2B　（二塁打）
+
+**Triple**: Total 3B　（三塁打）
+
+**HR**: Home runs　（ホームラン）
+
+**BB**: Walks （四球）
+
+**HBP**: Hit by pitch　（死球）
+
+**SF**: Sacrifice flies　（犠牲フライ）
+
+**TB**: Total Bases = 1×Single + 2×Double + 3×Triple + 4×HR　（塁打 ＝ 1**×**単打 + 2×二塁打 + 3×三塁打 + 4×ホームラン）
+
+**SLG**: Slugging percentage = TB / AB.　（長打率　＝　塁打/打席数）
+
+**OBP**: On-base percentage = (HIT + BB + HBP) / (AB + BB + HBP + SF).（出塁率　＝　(安打数 + 四球数 + 死球数) ÷ (打数 + 四球数 + 死球数 + 犠飛数)）
+
+**OPS**: On-base percentage + slugging = OBP + SLG.　（OPS ＝　出塁率　＋　長打率）　
+
+**“Players highlighted in light blue are qualified players (met the minimum AB).”**
+
+※水色でハイライトされている選手は、規定打席（または規定打数）に到達しています。
 
 ```{r}
 library(dplyr)
@@ -117,20 +140,20 @@ at_bat <- df %>%
   group_by(player_name) %>% 
   summarise(
     game = n_distinct(game_id), .groups = "drop",
-    AB_b = sum(total_ab, na.rm = TRUE),
-    HIT_b = sum(hit, na.rm = TRUE),
-    AV_b = HIT_b/AB_b,
-    RBI_b = sum(rbi, na.rm = TRUE),
-    One_b = sum(one_base, na.rm = TRUE),
-    Double_b = sum(two_base, na.rm = TRUE), 
-    Triple_b = sum(three_base, na.rm = TRUE),
-    Hr_b = sum(hr, na.rm = TRUE),
-    Bb_b = sum(bb, na.rm = TRUE),
-    Db_b = sum(db, na.rm = TRUE),
-    SF_b = sum(rem_sac, na.rm = TRUE),
-    TB_b = One_b*1 + Double_b*2 + Triple_b*3 + Hr_b*4,
-    SLG = TB_b/AB_b, #SLG
-    OBP = (HIT_b + Bb_b + Db_b) / (AB_b + Bb_b + SF_b + Db_b),
+    AB = sum(total_ab, na.rm = TRUE),
+    HIT = sum(hit, na.rm = TRUE),
+    AVG = HIT/AB,
+    RBI = sum(rbi, na.rm = TRUE),
+    Single = sum(one_base, na.rm = TRUE),
+    Double = sum(two_base, na.rm = TRUE), 
+    Triple = sum(three_base, na.rm = TRUE),
+    HR = sum(hr, na.rm = TRUE),
+    BB = sum(bb, na.rm = TRUE),
+    HBP = sum(db, na.rm = TRUE),
+    SF = sum(rem_sac, na.rm = TRUE),
+    TB = Single*1 + Double*2 + Triple*3 + HR*4,
+    SLG = TB/AB, #SLG
+    OBP = (HIT + BB + HBP) / (AB + BB + SF + HBP),
     OPS = SLG + OBP
     
     ) %>% 
@@ -139,44 +162,32 @@ at_bat <- df %>%
 #at_bat
 
 ####### hightlight the quarify player #########
-qualify_player <- at_bat %>% 
-  mutate(hightlight = AB_b >= 69) # 30 * 2.3 = 69
-## game_id distinct() * 2.3 = ?
+qualify_players <- at_bat %>% 
+  mutate(qualify_player = ceiling(n_distinct(df$game_id) * 2.3), # make sure the qualify player
+         hightlight = AB >= qualify_player) # hightlight qualify player in kable
 
+## Remove TB and highlight column in kable
+game_stats <- qualify_players %>% 
+  select(!c(TB, hightlight))
 
-### Rename the columns name
-hits_tbale_rename <- qualify_player %>% 
-  rename(
-    Player = player_name,
-    AB = AB_b, 
-    H = HIT_b,
-    AVG = AV_b,
-    RBI = RBI_b,
-    Single = One_b,
-    Double = Double_b,
-    Triple = Triple_b,
-    HR = Hr_b,
-    BB = Bb_b,
-    HBP = Db_b,
-    SF = SF_b,
-  )
-
-game_stats <- hits_tbale_rename %>% 
-  select(!c(TB_b, hightlight))
-
-### Display the 3 decimal on AVG, OPS etc...
+### Display the 3 decimal on AVG, OPS, OBP, SLG.
 three_decimal <- function(x) {
-  out <- ifelse(is.na(),"",sprintf("%.3f", x))
-  out <- ifelase(out != "" & 1 < x & x >= 0, sub("^0", "", x), out)
+  out <- ifelse(is.na(x),"",sprintf("%.3f", x))
+  out <- ifelse(out != "" & 1 > x & x >= 0, sub("^0", "", out), out) # if the number grater than 1, keep them. 
   out
 } 
-  
+
+## adding to kable
+game_stats_total <- game_stats %>% 
+  mutate(across(c(AVG, SLG, OBP, OPS), three_decimal))
+
+
 
 
 
 ###### Create a Table ######
-kable(game_stats, caption = "Total Stats for basedball (軟式）and softball", booktabs = TRUE) %>%
-  kableExtra::row_spec(which(qualify_player$hightlight), background = "slategray1") %>% 
+kable(game_stats_total, caption = "Total Stats for basedball (軟式）and softball", booktabs = TRUE) %>%
+  kableExtra::row_spec(which(qualify_players$hightlight), background = "slategray1") %>% 
   kable_styling(
     bootstrap_options = c("condensed", "basic", "hover")
   ) %>% 
@@ -185,55 +196,28 @@ kable(game_stats, caption = "Total Stats for basedball (軟式）and softball", 
 
 ```
 
-```{r}
-## Total At Bat
-total_at_bat <- df %>% 
-  filter(event != 'BB') %>% 
-  count(player_name) %>% 
-  arrange(desc(n))
-
-## Total HIT
-total_hit <- df %>% 
-  filter(event == 'HIT') %>% 
-  count(player_name) %>% 
-  arrange(desc(n))
-
-
-batting_ave <- df %>% 
-    mutate(
-        total = event != "BB",
-        hit = event == "HIT"
-    ) %>% 
-    group_by(player_name) %>% 
-    summarise(
-      AB = sum(total, na.rm = TRUE),
-      H = sum(hit, na.rm = TRUE),
-      AV = H/AB)  %>% 
-  arrange(desc(AB))
-
-
-
-batting_ave
-```
-
-## Batting Average of Softball
+## Ranking for some categories
 
 ```{r}
-batting_ave_s <- df %>% 
-    filter(sport == 's') %>% 
-    mutate(
-        total = event != "BB",
-        hit = event == "HIT"
-    ) %>% 
-    group_by(player_name) %>% 
-    summarise(
-      AB = sum(total, na.rm = TRUE),
-      H = sum(hit, na.rm = TRUE),
-      AV = H/AB)  %>% 
-  arrange(desc(H))
 
-batting_ave_s
+# Ranking for Total HIT
+top10_hit <- game_stats_total %>% 
+  select(player_name, HIT, Single, Double, Triple, HR) %>% 
+  arrange(desc(HIT)) %>% 
+  slice_head(n = 10)
 
+
+# Create a table for Hit ranking table 
+kable(
+  top10_hit,
+  caption = "Total Hit Ranking Table"
+) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "Top 10 players")
 ```
 
 ## Batting Average of baseball (軟式）
@@ -343,15 +327,6 @@ kable(
   row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
   column_spec(1, bold = TRUE, color = "darkcyan") %>% 
   footnote(general = "THis is a general footnote")
-```
-
-```{r}
-
-
-library(dplyr)
-
-df %>% summarise(games = n_distinct(game_id))
-
 ```
 
 ```{r}
