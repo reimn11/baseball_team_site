@@ -168,7 +168,7 @@ qualify_players <- at_bat %>%
 
 ## Remove TB and highlight column in kable
 game_stats <- qualify_players %>% 
-  select(!c(TB, hightlight))
+  select(!c(hightlight, qualify_player))
 
 ### Display the 3 decimal on AVG, OPS, OBP, SLG.
 three_decimal <- function(x) {
@@ -191,7 +191,7 @@ kable(game_stats_total, caption = "Total Stats for basedball (軟式）and softb
   kable_styling(
     bootstrap_options = c("condensed", "basic", "hover")
   ) %>% 
-  row_spec(0, bold = TRUE, color = "slategray1", background = "blue") %>%   column_spec(1, bold = TRUE, color = "slategray1", background = "blue") %>% 
+  row_spec(0, bold = TRUE, color = "white", background = "steelblue1") %>%   column_spec(1, bold = TRUE, color = "white", background = "steelblue2") %>% 
   footnote(general = "This order based on HIT")
 
 ```
@@ -202,7 +202,7 @@ kable(game_stats_total, caption = "Total Stats for basedball (軟式）and softb
 
 # Ranking for Total HIT
 top10_hit <- game_stats_total %>% 
-  select(player_name, HIT, Single, Double, Triple, HR) %>% 
+  select(player_name, HIT) %>% 
   arrange(desc(HIT)) %>% 
   slice_head(n = 10)
 
@@ -218,7 +218,80 @@ kable(
   row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
   column_spec(1, bold = TRUE, color = "darkcyan") %>% 
   footnote(general = "Top 10 players")
+
+# Ranking single
+top10_single <- game_stats_total %>% 
+  select(player_name, Single) %>% 
+  arrange(desc(Single)) %>% 
+  slice_head(n = 10)
+
+kable(top10_single, caption = "Total 10 Single Ranking Table") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "Top 10 players")
+
+# Ranking single
+top10_single <- game_stats_total %>% 
+  select(player_name, Single) %>% 
+  arrange(desc(Single)) %>% 
+  slice_head(n = 10)
+
+kable(top10_single, caption = "Total 10 Single Ranking Table") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "Top 10 players")
+
+# Ranking double
+top10_double <- game_stats_total %>% 
+  select(player_name, Double) %>% 
+  arrange(desc(Double)) %>% 
+  slice_head(n = 11)
+
+kable(top10_double, caption = "Total 10 Double Ranking Table") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "Top 10 players")
+
+# Ranking triple
+top10_triple <- game_stats_total %>% 
+  select(player_name, Triple) %>% 
+  arrange(desc(Triple)) %>% 
+  slice_head(n = 5)
+
+kable(top10_triple, caption = "Total 10 Triple Ranking Table") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "Top 10 players")
+
+
+# Ranking HR
+top10_hr <- game_stats_total %>% 
+  select(player_name, HR) %>% 
+  arrange(desc(HR)) %>% 
+  slice_head(n = 13)
+
+kable(top10_hr, caption = "Total 10 HR Ranking Table") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
+  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
+  footnote(general = "Top 10 players")
 ```
+
+\
 
 ## Batting Average of baseball (軟式）
 
