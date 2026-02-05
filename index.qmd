@@ -199,13 +199,34 @@ kable(game_stats_total, caption = "Total Stats for basedball (軟式）and softb
 ## Ranking for some categories
 
 ```{r}
+### makeing the ranking
+make_ranking <- function(data, stat_col, n = 10, include_tie = FALSE) {
+  # data: your table (ex: game_stats)
+  # stat_col: column name as string (ex: "HIT")
+  # n: how many players to show
+  # include_ties_at_cutoff:
+  #   FALSE -> always exactly n players
+  #   TRUE  -> include everyone tied with the nth player (may show > n players)
+  x <- data %>% 
+    select(player_name, value = all_of(stat_col)) %>% 
+    filter(!is.na(value)) %>% 
+    arrange(desc(value)) %>% 
+    mutate(
+      rank_num = dense_rank(desc(value)),
+      rank = paste0(rank_num, ".")
+    )
+  
+    if (include_tie) {
+      x <- x %>% filter(rank_num <= n)
+    } else {
+      x <- x %>% slice_head(n=n)
+    }
+  
+  x %>% select(rank, player_name, value)
+}
 
-# Ranking for Total HIT
-top10_hit <- game_stats_total %>% 
-  select(player_name, HIT) %>% 
-  arrange(desc(HIT)) %>% 
-  slice_head(n = 10)
-
+## Ranking for Total HIT ##
+top10_hit <- make_ranking(game_stats_total, 'HIT', n = 10, include_tie = TRUE)
 
 # Create a table for Hit ranking table 
 kable(
@@ -219,25 +240,9 @@ kable(
   column_spec(1, bold = TRUE, color = "darkcyan") %>% 
   footnote(general = "Top 10 players")
 
-# Ranking single
-top10_single <- game_stats_total %>% 
-  select(player_name, Single) %>% 
-  arrange(desc(Single)) %>% 
-  slice_head(n = 10)
 
-kable(top10_single, caption = "Total 10 Single Ranking Table") %>%
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed")
-  ) %>% 
-  row_spec(0, bold = TRUE, color = "azure", background = "#6495ED") %>% 
-  column_spec(1, bold = TRUE, color = "darkcyan") %>% 
-  footnote(general = "Top 10 players")
-
-# Ranking single
-top10_single <- game_stats_total %>% 
-  select(player_name, Single) %>% 
-  arrange(desc(Single)) %>% 
-  slice_head(n = 10)
+## Ranking single ##
+top10_single <- make_ranking(game_stats_total, 'Single', n = 10, include_tie = TRUE)
 
 kable(top10_single, caption = "Total 10 Single Ranking Table") %>%
   kable_styling(
@@ -248,10 +253,7 @@ kable(top10_single, caption = "Total 10 Single Ranking Table") %>%
   footnote(general = "Top 10 players")
 
 # Ranking double
-top10_double <- game_stats_total %>% 
-  select(player_name, Double) %>% 
-  arrange(desc(Double)) %>% 
-  slice_head(n = 11)
+top10_double <- make_ranking(game_stats_total, 'Double', n = 10, include_tie = TRUE)
 
 kable(top10_double, caption = "Total 10 Double Ranking Table") %>%
   kable_styling(
@@ -261,11 +263,9 @@ kable(top10_double, caption = "Total 10 Double Ranking Table") %>%
   column_spec(1, bold = TRUE, color = "darkcyan") %>% 
   footnote(general = "Top 10 players")
 
-# Ranking triple
-top10_triple <- game_stats_total %>% 
-  select(player_name, Triple) %>% 
-  arrange(desc(Triple)) %>% 
-  slice_head(n = 5)
+
+# Ranking Triple
+top10_triple <- make_ranking(game_stats_total, 'Triple', n = 10, include_tie = TRUE)
 
 kable(top10_triple, caption = "Total 10 Triple Ranking Table") %>%
   kable_styling(
@@ -277,10 +277,7 @@ kable(top10_triple, caption = "Total 10 Triple Ranking Table") %>%
 
 
 # Ranking HR
-top10_hr <- game_stats_total %>% 
-  select(player_name, HR) %>% 
-  arrange(desc(HR)) %>% 
-  slice_head(n = 13)
+top10_hr <- make_ranking(game_stats_total, 'HR', n = 10, include_tie = TRUE)
 
 kable(top10_hr, caption = "Total 10 HR Ranking Table") %>%
   kable_styling(
@@ -290,6 +287,8 @@ kable(top10_hr, caption = "Total 10 HR Ranking Table") %>%
   column_spec(1, bold = TRUE, color = "darkcyan") %>% 
   footnote(general = "Top 10 players")
 ```
+
+\
 
 \
 
