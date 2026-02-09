@@ -7,10 +7,11 @@ project:
 website:
   navbar:
     left:
+      - href: index.qmd
+        text: Home
       - href: 2025.qmd
-        text: '2025'
+        text: "2025"
       - about.qmd
-
 format:
   html:
     theme:
