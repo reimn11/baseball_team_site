@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  execute-dir: project
+
 
 website:
   title: "baseball_team_site"
