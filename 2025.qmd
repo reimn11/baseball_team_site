@@ -502,38 +502,3 @@ kable(top10_game, caption = "Top 10 Players by Games Played") %>%
 \
 
 \
-
-```{r}
-#Total 
-total_hit_both <- df %>% 
-  filter(event == 'HIT') %>% 
-  mutate(hit = event == "HIT") %>% 
-  group_by(player_name) %>% 
-  summarise(H = sum(hit, na.rm = TRUE))  %>% 
-  arrange(desc(H))
-
-total_hit_both
-
-# Softball
-total_hit_s <- df %>% 
-  filter(event == 'HIT', sport == 's') %>% 
-  mutate(hit = event == "HIT") %>% 
-  group_by(player_name) %>% 
-  summarise(H = sum(hit, na.rm = TRUE))  %>% 
-  arrange(desc(H))
-
-total_hit_s
-
-# Baseball
-total_hit_b <- df %>% 
-  filter(event == 'HIT', sport == 'b') %>% 
-  mutate(hit = event == "HIT") %>% 
-  group_by(player_name) %>% 
-  summarise(H = sum(hit, na.rm = TRUE))  %>% 
-  arrange(desc(H))
-
-total_hit_b
-
-```
-
-\
