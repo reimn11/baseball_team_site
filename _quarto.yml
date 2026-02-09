@@ -5,18 +5,17 @@ project:
 
 
 website:
-  title: "baseball_team_site"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
+      - href: 2025.qmd
+        text: '2025'
       - about.qmd
 
 format:
   html:
     theme:
-      - cosmo
       - brand
+      - cosmo
     css: styles.css
     toc: true
 
