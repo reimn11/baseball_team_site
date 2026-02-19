@@ -16,7 +16,7 @@ format:
   html:
     theme:
       - brand
-      - cosmo
+      - minty
     css: styles.css
     toc: true
 
