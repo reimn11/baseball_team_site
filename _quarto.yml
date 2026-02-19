@@ -11,7 +11,8 @@ website:
         text: Home
       - href: 2025.qmd
         text: "2025"
-      - about.qmd
+      - href: 2026.qmd
+        text: "2026"
 format:
   html:
     theme:
