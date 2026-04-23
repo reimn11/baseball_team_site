@@ -1,0 +1,40 @@
+/* css styles */
+
+
+/* --- Remove zebra striping from ANY bootstrap table --- */
+table.table,
+table.kable-table {
+  /* Bootstrap 5 striping uses CSS variables */
+  --bs-table-striped-bg: transparent;
+  --bs-table-striped-color: inherit;
+
+  /* Some themes use these too */
+  --bs-table-bg-type: transparent;
+  --bs-table-bg-state: transparent;
+}
+
+/* If striping is applied directly via nth-of-type */
+table.table > tbody > tr:nth-of-type(odd) > *,
+table.table > tbody > tr:nth-of-type(even) > * {
+  background-color: transparent;
+}
+
+h1, h2, h3{
+  letter-spacing: -0.01em;
+}
+h2{
+  margin-top: 1.2rem;
+}
+
+body {
+  background-color: lavenderblush;  /* change this color */
+}
+
+/* ---------- Tables (Quarto + kableExtra) ---------- */
+table{
+  background: #ffffff;
+}
+
+.table-explain {
+  color: blue;   /* choose your color */
+}

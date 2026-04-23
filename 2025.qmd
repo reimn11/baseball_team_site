@@ -3,6 +3,13 @@ title: "Honolulu Gragons & Makiki Excelsior's Team Stats"
 echo: false
 message: false
 warning: false
+format:
+  html:
+    theme:
+      - brand
+      - minty
+    css: styles_2025.css
+body-classes: page-2025
 ---
 
 ```{r}
@@ -12,7 +19,7 @@ library(tidyr)
 library(knitr)
 library(kableExtra)
 library(tidyverse)
-df <- read.csv("data/baseball _records.csv") %>%
+  df <- read.csv("data/baseball _records.csv") %>%
   mutate(
   date = as.Date(date),
   year = lubridate::year(date)
@@ -27,7 +34,7 @@ df_2025 <- df %>% filter(year == 2025)
 
 ```
 
-### ⚾︎Table Explanation⚾︎ 
+### ⚾︎Table Explanation⚾︎
 
 **game**: Number of games you played　（出場試合数）
 
@@ -592,6 +599,6 @@ kable(top10_game, caption = "Top 10 Players by Games Played") %>%
   footnote(general = "30 games in 2025")
 ```
 
-#### 30 games in 2025 (19 softball, 11 baseball) 
+#### 30 games in 2025 (19 softball, 11 baseball)
 
 \
