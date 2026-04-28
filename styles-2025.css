@@ -19,6 +19,21 @@ table.table > tbody > tr:nth-of-type(even) > * {
   background-color: transparent;
 }
 
+/* Remove theme default striping */
+.table-striped > tbody > tr:nth-of-type(odd) > *,
+.table-striped > tbody > tr:nth-of-type(even) > * {
+  --bs-table-accent-bg: transparent !important;
+  --bs-table-striped-bg: transparent !important;
+  background-color: transparent !important;
+}
+
+
+/* Force all table cells to white */
+.table tbody tr td {
+  background-color: white !important;
+}
+
+
 h1, h2, h3{
   letter-spacing: -0.01em;
 }
@@ -27,7 +42,7 @@ h2{
 }
 
 body {
-  background-color: ivory;  /* change this color */
+  background-color: lightcyan;  /* change this color */
 }
 
 /* ---------- Tables (Quarto + kableExtra) ---------- */

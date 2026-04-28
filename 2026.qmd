@@ -1,11 +1,10 @@
 ---
-title: "Honolulu Gragons & Makiki Excelsior's Team Stats"
+title: "2026 Honolulu Gragons & Makiki Excelsior's Team Stats"
 format:
   html:
     theme:
-      - brand
       - minty
-    css: styles_2025.css
+    css: styles_2026.css
     toc: true
     toc-location: right
 execute:          
@@ -40,7 +39,7 @@ df<- df %>% filter(year %in% c(2026))
 
 
 
-#df %>% filter(year(date) == 2026) %>% 
+#df %>% filter(year(date) == 2026, sport == 'b') %>% 
   #summarise(unique_games = n_distinct(game_id))
  
 ```
@@ -83,10 +82,7 @@ df<- df %>% filter(year %in% c(2026))
 
 ※ハイライトされている選手は、規定打席（または規定打数）に到達しています。
 
-#  ⚾︎Total Stats(Baseball & Softball)⚾︎
-
 ```{r}
-
 ####### Data cleaning ########
 # hit_type (1B, !B, and 1b)
 df <- df %>% 
@@ -94,10 +90,22 @@ df <- df %>%
     hit_type = str_trim(hit_type),
     hit_type = na_if(hit_type, ""), # "" -> NA
     hit_type = str_to_upper(hit_type), # 1b -> 1B
-    hit_type = recode(hit_type, '!B' = "1B") # str_to_upper changes !b to !B.
+    hit_type = recode(hit_type, '!B' = "1B"), # str_to_upper changes !b to !B.
+    player_name = na_if(player_name, ""),
+    hit_type = recode(hit_type, 'DP' = "")
   )
-#sort(unique(df$hit_type)) #Check datas were cleaned correctly
+#sort(unique(df$player_name)) #Check datas were cleaned correctly
 
+# Check where is the problem 
+df_filter<- df %>% 
+  filter(player_name == "")
+
+df_filter
+```
+
+#  ⚾︎Total Stats(Baseball & Softball)⚾︎
+
+```{r}
 
 # Total Hit Records
 ## Total At Bat
@@ -219,13 +227,13 @@ game_stats_total <- game_stats %>%
 
 ###### Create a Table ######
 kable(game_stats_total,
-      caption = "30 baseball and softball games in 2025",
+      caption = "2026",
       booktabs = TRUE) %>%
   kableExtra::row_spec(which(qualify_players$hightlight), background = "lightcyan1") %>%
   kable_styling(bootstrap_options = c("condensed", "hover", "bordered")) %>%  # <- removed "basic"
   row_spec(0, bold = TRUE, color = "black", background = "white") %>%
   column_spec(1, bold = TRUE, color = "white", background = "blue1") %>%
-  footnote(general = "This order based on number of games played")
+  footnote(general = "This order based on number of total at bat")
 
 ```
 
@@ -305,13 +313,15 @@ game_stats_total_base_show <- game_stats_total_base %>%
 
 ###### Create a Table ######
 
-kable(game_stats_total_base_show, caption = "11 baaseball games in 2025", booktabs = TRUE) %>%
-  kableExtra::row_spec(hl_rows, background = "lightcyan1") %>% 
-  kable_styling(
-    bootstrap_options = c("condensed", "hover", "bordered")
-  ) %>% 
-  row_spec(0, bold = TRUE, color = "black", background = "white") %>%   column_spec(1, bold = TRUE, color = "white", background = "turquoise") %>% 
-  footnote(general = "This order based on number of games played")
+kable(game_stats_total_base_show,
+      caption = "2026",
+      booktabs = TRUE) %>%
+  row_spec(1:nrow(game_stats_total_base_show), background = "white") %>%  # ← add this
+  kableExtra::row_spec(hl_rows, background = "lightcyan1") %>%
+  kable_styling(bootstrap_options = c("condensed", "hover", "bordered")) %>%
+  row_spec(0, bold = TRUE, color = "black", background = "white") %>%
+  column_spec(1, bold = TRUE, color = "white", background = "turquoise") %>%
+  footnote(general = "This order based on number of total at bat")
 
 
 
@@ -392,13 +402,13 @@ game_stats_total_soft_show <- game_stats_total_soft %>%
 
 
 ###### Create a Table ######
-kable(game_stats_total_soft_show, caption = "19 softball games in 2025", booktabs = TRUE) %>%
+kable(game_stats_total_soft_show, caption = "2026", booktabs = TRUE) %>%
   kableExtra::row_spec(hl_rows, background = "lightcyan1") %>% 
   kable_styling(
     bootstrap_options = c("condensed", "hover", "bordered")
   ) %>% 
   row_spec(0, bold = TRUE, color = "black", background = "white") %>%   column_spec(1, bold = TRUE, color = "black", background = "khaki") %>% 
-  footnote(general = "This order is based on number games played")
+  footnote(general = "This order is based on numbers of total at bat")
           
 ```
 
@@ -610,4 +620,4 @@ kable(top10_game, caption = "Top 10 Players by Games Played") %>%
   footnote(general = "30 games in 2025")
 ```
 
-#### 30 games in 2025 (19 softball, 11 baseball)
+#### 7 games in 2026 ( 4 softball, 3 baseball)

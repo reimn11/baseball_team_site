@@ -212,13 +212,13 @@ game_stats_total <- game_stats %>%
 
 ###### Create a Table ######
 kable(game_stats_total,
-      caption = "30 baseball and softball games in 2025",
+      caption = "",
       booktabs = TRUE) %>%
   kableExtra::row_spec(which(qualify_players$hightlight), background = "lightcyan1") %>%
   kable_styling(bootstrap_options = c("condensed", "hover", "bordered")) %>%  # <- removed "basic"
   row_spec(0, bold = TRUE, color = "black", background = "white") %>%
   column_spec(1, bold = TRUE, color = "white", background = "blue1") %>%
-  footnote(general = "This order based on number of games played")
+  footnote(general = "This order is based on numbers of total at bat")
 
 ```
 
@@ -256,7 +256,7 @@ at_bat_base <- df %>%
     OBP = (HIT + BB + HBP) / (AB + BB + SF + HBP),
     OPS = SLG + OBP
     ) %>% 
-  arrange(desc(game))
+  arrange(desc(AB))
 
 #at_bat_base
 
@@ -298,15 +298,16 @@ game_stats_total_base_show <- game_stats_total_base %>%
 
 ###### Create a Table ######
 
-kable(game_stats_total_base_show, caption = "11 baaseball games in 2025", booktabs = TRUE) %>%
-  kableExtra::row_spec(hl_rows, background = "lightcyan1") %>% 
+kable(game_stats_total_base_show, booktabs = TRUE) %>%
+  row_spec(1:nrow(game_stats_total_base_show), background = "white") %>%
+  kableExtra::row_spec(hl_rows, background = "lightcyan1") %>%
   kable_styling(
-    bootstrap_options = c("condensed", "hover", "bordered")
-  ) %>% 
-  row_spec(0, bold = TRUE, color = "black", background = "white") %>%   column_spec(1, bold = TRUE, color = "white", background = "turquoise") %>% 
-  footnote(general = "This order based on number of games played")
-
-
+    bootstrap_options = c("condensed", "hover", "bordered"),
+    stripe_color = NULL
+  ) %>%
+  row_spec(0, bold = TRUE, color = "black", background = "white") %>%
+  column_spec(1, bold = TRUE, color = "white", background = "turquoise") %>%
+  footnote(general = "This order is based on numbers of total at bat")
 
 ```
 
@@ -385,13 +386,13 @@ game_stats_total_soft_show <- game_stats_total_soft %>%
 
 
 ###### Create a Table ######
-kable(game_stats_total_soft_show, caption = "19 softball games in 2025", booktabs = TRUE) %>%
+kable(game_stats_total_soft_show, caption = "", booktabs = TRUE) %>%
   kableExtra::row_spec(hl_rows, background = "lightcyan1") %>% 
   kable_styling(
     bootstrap_options = c("condensed", "hover", "bordered")
   ) %>% 
   row_spec(0, bold = TRUE, color = "black", background = "white") %>%   column_spec(1, bold = TRUE, color = "black", background = "khaki") %>% 
-  footnote(general = "This order is based on number games played")
+  footnote(general = "This order is based on numbers of total at bat")
           
 ```
 
