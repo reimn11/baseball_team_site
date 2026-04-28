@@ -5,7 +5,7 @@ format:
     theme:
       - brand
       - minty
-    css: styles_2025.css
+    css: styles.css
     toc: true
     toc-location: right
 execute:          
