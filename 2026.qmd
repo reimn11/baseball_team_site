@@ -1,12 +1,17 @@
 ---
-title: "Stats for 2026"
+title: "Honolulu Gragons & Makiki Excelsior's Team Stats"
 format:
   html:
     theme:
       - brand
       - minty
-    css: styles.css
+    css: styles_2025.css
     toc: true
+    toc-location: right
+execute:          
+  echo: false     
+  message: false
+  warning: false
 ---
 
 ------------------------------------------------------------------------
@@ -25,7 +30,7 @@ library(tidyr)
 library(knitr)
 library(kableExtra)
 library(tidyverse)
-  df <- read.csv("data/baseball_records_T.csv") %>%
+  df <- read.csv("data/Baseball _records.csv") %>%
   mutate(
   date = as.Date(date),
   year = lubridate::year(date)
@@ -184,7 +189,7 @@ at_bat <- df %>%
     OPS = SLG + OBP
     
     ) %>% 
-  arrange(desc(game))
+  arrange(desc(AB))
 
 #at_bat
 
@@ -258,7 +263,7 @@ at_bat_base <- df %>%
     OBP = (HIT + BB + HBP) / (AB + BB + SF + HBP),
     OPS = SLG + OBP
     ) %>% 
-  arrange(desc(game))
+  arrange(desc(AB))
 
 #at_bat_base
 
@@ -346,7 +351,7 @@ at_bat_soft <- df %>%
     OBP = (HIT + BB + HBP) / (AB + BB + SF + HBP),
     OPS = SLG + OBP
     ) %>% 
-  arrange(desc(game))
+  arrange(desc(AB))
 
 #at_bat_soft
 

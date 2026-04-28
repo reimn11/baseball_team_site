@@ -27,7 +27,7 @@ h2{
 }
 
 body {
-  background-color: lavenderblush !important;  /* change this color */
+  background-color: ivory;  /* change this color */
 }
 
 /* ---------- Tables (Quarto + kableExtra) ---------- */
@@ -37,10 +37,4 @@ table{
 
 .table-explain {
   color: blue;   /* choose your color */
-}
-
-
-/* styles-2025.css*/
-.page-2025 .navbar {
-  background-color: black !important;
 }
